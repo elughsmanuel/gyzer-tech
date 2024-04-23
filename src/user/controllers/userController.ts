@@ -6,7 +6,7 @@ import {
     updateUserSchema,
     updatePasswordSchema,
     updateUserRoleSchema,
- } from '../../validators/schema';
+ } from '../../auth/validators/schema';
 
 const userRepository = new UserRepository();
 const userService = new UserService(userRepository);

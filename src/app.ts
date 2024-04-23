@@ -8,6 +8,7 @@ import { errorMiddleware } from './middleware/errorMiddleware';
 import { logger } from './log/logger';
 import authRouter from './auth/routers/authRouter';
 import userRouter from './user/routers/userRouter';
+import evaluationRouter from './evaluation/routers/evaluationRouter';
 
 const app = express();
 const host = process.env.HOST || 'localhost';
@@ -39,6 +40,7 @@ app.get('/api/v1', (req, res) => {
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/evaluations', evaluationRouter);
 
 app.all('*', (req, res) => {
     return res.status(StatusCodes.NOT_FOUND).json({
