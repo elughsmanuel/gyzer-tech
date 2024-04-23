@@ -5,7 +5,7 @@ import {
     loginSchema, 
     emailSchema,
     resetPasswordSchema,
-} from '../../validators/schema';
+} from '../validators/schema';
 import AuthService from '../services/authService';
 import UserRepository from '../../user/repositories/userRepository';
 
