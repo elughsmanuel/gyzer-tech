@@ -205,6 +205,12 @@ class UserRepository {
     
       return user;
     }
+
+    async getAllUsersForReminder() {       
+      const users = await User.findAll();
+    
+      return users;
+    }
 }
 
 export default UserRepository;

@@ -78,7 +78,7 @@ class AuthService {
 
         await new EmailService(
             user, 
-            welcomeUrl
+            welcomeUrl,
         ).sendWelcome();
 
         return { 

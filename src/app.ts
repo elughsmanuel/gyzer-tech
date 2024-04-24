@@ -12,6 +12,8 @@ import authRouter from './auth/routers/authRouter';
 import userRouter from './user/routers/userRouter';
 import evaluationRouter from './evaluation/routers/evaluationRouter';
 import { RATE_LIMIT } from './utils/constants';
+import { monthlyReminderCron } from './cron';
+import UserRepository from './user/repositories/userRepository';
 
 const app = express();
 const host = process.env.HOST || 'localhost';
@@ -27,6 +29,10 @@ const limiter = rateLimit({
     message: RATE_LIMIT,
 });
 app.use('/api', limiter);
+
+const userRepository = new UserRepository();
+
+monthlyReminderCron(userRepository);
 
 app.get('/', (req, res) => {
     return  res.status(StatusCodes.OK).json({

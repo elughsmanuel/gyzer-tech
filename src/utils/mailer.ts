@@ -4,6 +4,7 @@ import { convert } from 'html-to-text';
 import { 
     SEND_WELCOME,
     SEND_RESET_PASSWORD,
+    SEND_MONTHLY_REMINDER,
 } from './constants';
 
 interface User {
@@ -17,7 +18,7 @@ class EmailService {
     url: string;
     from: string;
 
-    constructor(user: User, url: string,) {
+    constructor(user: User, url: string) {
         this.from = `${process.env.ADMIN_FIRST_NAME} ${process.env.ADMIN_LAST_NAME} <${process.env.ADMIN_EMAIL}>`;
         this.to = user.email;
         this.firstName = user.firstName;
@@ -66,6 +67,10 @@ class EmailService {
     async sendResetPasswordEmail() {
         await this.send('passwordReset', SEND_RESET_PASSWORD);
     }  
+
+    async sendMonthlyReminder() {
+        await this.send('monthlyReminder', SEND_MONTHLY_REMINDER);
+    }
 };
 
 export default EmailService;
