@@ -83,6 +83,15 @@ module.exports = {
                 allowNull: false,
                 defaultValue: STAFF,
             },
+            managerId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: "MANAGER ID REQUIRED",
+                    },
+                },
+            },
             resetPasswordToken: {
                 type: DataTypes.STRING,
                 allowNull: true,

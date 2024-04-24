@@ -50,6 +50,12 @@ export const signUpSchema = Joi.object({
         "any.required": CONFIRM_PASSWORD_REQUIRED, 
         "string.empty": EMPTY_CONFIRM_PASSWORD,
     }),
+    managerId: Joi.number().integer().required().messages({
+        "any.required": 'MANAGER ID REQUIRED',
+        "string.empty": 'EMPTY MANAGER ID',
+        "number.base": "MANAGER ID NUMBER",
+        "number.integer": 'MANAGER ID INTEGER',
+    }),
 });
 
 export const loginSchema = Joi.object({
@@ -97,6 +103,7 @@ export const updateUserSchema = Joi.object({
         "string.email": "Please provide a valid email address",
     }),
     username: Joi.string().trim(),
+    managerId: Joi.number().integer(),
 });
 
 export const updateUserRoleSchema = Joi.object({

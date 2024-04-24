@@ -20,75 +20,75 @@ module.exports = {
                     },
                 },
             },
-            workQuality: {
+            workQualityScore: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "WORK QUALITY REQUIRED",
+                        msg: "WORK QUALITY SCORE REQUIRED",
                     },
                 },
             },
-            workQualityNote: {
+            workQualityComment: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "WORK QUALITY NOTE REQUIRED",
+                        msg: "WORK QUALITY COMMENT REQUIRED",
                     },
                 },
             },
-            taskCompletion: {
+            taskCompletionScore: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "TASK COMPLETION REQUIRED",
+                        msg: "TASK COMPLETION SCORE REQUIRED",
                     },
                 },
             },
-            taskCompletionNote: {
+            taskCompletionComment: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "TASK COMPLETION NOTE REQUIRED",
+                        msg: "TASK COMPLETION COMMENT REQUIRED",
                     },
                 },
             },
-            aboveAndBeyond: {
+            aboveAndBeyondScore: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "ABOVE AND BEYOND REQUIRED",
+                        msg: "ABOVE AND BEYOND SCORE REQUIRED",
                     },
                 },
             },
-            aboveAndBeyondNote: {
+            aboveAndBeyondComment: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "ABOVE AND BEYOND NOTE REQUIRED",
+                        msg: "ABOVE AND BEYOND COMMENT REQUIRED",
                     },
                 },
             },
-            communication: {
+            communicationScore: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "COMMUNICATION REQUIRED",
+                        msg: "COMMUNICATION SCORE REQUIRED",
                     },
                 },
             },
-            communicationNote: {
+            communicationComment: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
                     notEmpty: {
-                        msg: "COMMUNICATION NOTE REQUIRED",
+                        msg: "COMMUNICATION COMMENT REQUIRED",
                     },
                 },
             },
@@ -98,6 +98,24 @@ module.exports = {
                 validate: {
                     notEmpty: {
                         msg: "EVALUATOR ID REQUIRED",
+                    },
+                },
+            },
+            month: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: "MONTH REQUIRED",
+                    },
+                },
+            },
+            year: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: "YEAR REQUIRED",
                     },
                 },
             },

@@ -2,13 +2,14 @@ import { Op } from "sequelize";
 import User from "../../models/user";
 
 class UserRepository {
-    async createUser(firstName: string, lastName: string, email: string, username: string, password: string) {
+    async createUser(firstName: string, lastName: string, email: string, username: string, password: string, managerId: number) {
         const user = await User.create({
             firstName: firstName,
             lastName: lastName,
             email: email,
             username: username,
             password: password,
+            managerId: managerId,
         });
 
         return user;

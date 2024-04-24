@@ -28,7 +28,7 @@ class AuthService {
         this.userRepository = userRepository;
     }
 
-    async signUp(firstName: string, lastName: string, email: string, username: string, password: string, confirmPassword: string, req: Request, res: Response) {
+    async signUp(firstName: string, lastName: string, email: string, username: string, password: string, confirmPassword: string, managerId: number, req: Request, res: Response) {
         const emailExist = await this.userRepository.findByEmail(email);
 
         if(emailExist) {
@@ -56,6 +56,7 @@ class AuthService {
             email,
             username,
             hashedPassword,
+            managerId,
         );
 
         const userData = {
@@ -65,6 +66,7 @@ class AuthService {
             email: user.email,
             username: user.username,
             role: user.role,
+            managerId: user.managerId,
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
         }
@@ -106,6 +108,7 @@ class AuthService {
             email: user.email,
             username: user.username,
             role: user.role,
+            managerId: user.managerId,
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
         }

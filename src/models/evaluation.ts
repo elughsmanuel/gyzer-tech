@@ -6,15 +6,17 @@ import sequelize from ".";
 interface EvaluationAttributes {
     id?: number;
     evaluateeId: number;
-    workQuality: number;
-    workQualityNote: string;
-    taskCompletion: number;
-    taskCompletionNote: string;
-    aboveAndBeyond: number;
-    aboveAndBeyondNote: string;
-    communication: number;
-    communicationNote: string;
+    workQualityScore: number;
+    workQualityComment: string;
+    taskCompletionScore: number;
+    taskCompletionComment: string;
+    aboveAndBeyondScore: number;
+    aboveAndBeyondComment: string;
+    communicationScore: number;
+    communicationComment: string;
     evaluatorId: number;
+    month: string;
+    year: number;
     createdAt?: Date,
     updatedAt?: Date,
 }
@@ -22,15 +24,17 @@ interface EvaluationAttributes {
 class Evaluation extends Model<EvaluationAttributes> implements EvaluationAttributes {
     public id!: number;
     public evaluateeId!: number;
-    public workQuality!: number;
-    public workQualityNote!: string;
-    public taskCompletion!: number;
-    public taskCompletionNote!: string;
-    public aboveAndBeyond!: number;
-    public aboveAndBeyondNote!: string;
-    public communication!: number;
-    public communicationNote!: string;
+    public workQualityScore!: number;
+    public workQualityComment!: string;
+    public taskCompletionScore!: number;
+    public taskCompletionComment!: string;
+    public aboveAndBeyondScore!: number;
+    public aboveAndBeyondComment!: string;
+    public communicationScore!: number;
+    public communicationComment!: string;
     public evaluatorId!: number;
+    public month!: string;
+    public year!: number;
     public createdAt?: Date;
     public updatedAt?: Date;
 }
@@ -50,75 +54,75 @@ Evaluation.init({
             },
         },
     },
-    workQuality: {
+    workQualityScore: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: "WORK QUALITY REQUIRED",
+                msg: "WORK QUALITY SCORE REQUIRED",
             },
         },
     },
-    workQualityNote: {
+    workQualityComment: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: "WORK QUALITY NOTE REQUIRED",
+                msg: "WORK QUALITY COMMENT REQUIRED",
             },
         },
     },
-    taskCompletion: {
+    taskCompletionScore: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: "TASK COMPLETION REQUIRED",
+                msg: "TASK COMPLETION SCORE REQUIRED",
             },
         },
     },
-    taskCompletionNote: {
+    taskCompletionComment: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: "TASK COMPLETION NOTE REQUIRED",
+                msg: "TASK COMPLETION COMMENT REQUIRED",
             },
         },
     },
-    aboveAndBeyond: {
+    aboveAndBeyondScore: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: "ABOVE AND BEYOND REQUIRED",
+                msg: "ABOVE AND BEYOND SCORE REQUIRED",
             },
         },
     },
-    aboveAndBeyondNote: {
+    aboveAndBeyondComment: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: "ABOVE AND BEYOND NOTE REQUIRED",
+                msg: "ABOVE AND BEYOND COMMENT REQUIRED",
             },
         },
     },
-    communication: {
+    communicationScore: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: "COMMUNICATION REQUIRED",
+                msg: "COMMUNICATION SCORE REQUIRED",
             },
         },
     },
-    communicationNote: {
+    communicationComment: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: "COMMUNICATION NOTE REQUIRED",
+                msg: "COMMUNICATION COMMENT REQUIRED",
             },
         },
     },
@@ -128,6 +132,24 @@ Evaluation.init({
         validate: {
             notEmpty: {
                 msg: "EVALUATOR ID REQUIRED",
+            },
+        },
+    },
+    month: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: "MONTH REQUIRED",
+            },
+        },
+    },
+    year: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: "YEAR REQUIRED",
             },
         },
     },

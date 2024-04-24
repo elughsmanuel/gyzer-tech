@@ -21,6 +21,7 @@ module.exports = {
                         Number(process.env.BCRYPT_SALT),
                     ),
                     role: ADMIN,
+                    managerId: 1,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },

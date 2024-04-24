@@ -25,6 +25,7 @@ interface UserAttributes {
     username: string;
     password: string;
     role?: string;
+    managerId: number;
     resetPasswordToken?: string | null,
     resetPasswordExpires?: Date | null,
     createdAt?: Date,
@@ -39,6 +40,7 @@ class User extends Model<UserAttributes> implements UserAttributes {
     public username!: string;
     public password!: string;
     public role!: string;
+    public managerId!: number;
     public resetPasswordToken?: string | null;
     public resetPasswordExpires?: Date | null;
     public createdAt?: Date;
@@ -108,6 +110,15 @@ User.init({
         type: DataTypes.ENUM(STAFF, MANAGER, ADMIN),
         allowNull: false,
         defaultValue: STAFF,
+    },
+    managerId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: "MANAGER ID REQUIRED",
+            },
+        },
     },
     resetPasswordToken: {
         type: DataTypes.STRING,

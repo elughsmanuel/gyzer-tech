@@ -27,6 +27,7 @@ export const signUp = async (
             schema.username,
             schema.password,
             schema.confirmPassword,
+            schema.managerId,
             req,
             res,
         );
