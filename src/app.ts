@@ -5,6 +5,7 @@ import http from "http";
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import cors from 'cors';
 import sequelize from './models';
 import { errorMiddleware } from './middleware/errorMiddleware';
 import { logger } from './log/logger';
@@ -25,6 +26,7 @@ const httpServer = http.createServer(app);
 
 app.use(helmet());
 app.use(express.json());
+app.use(cors()); 
 
 const limiter = rateLimit({
     max: 100,
