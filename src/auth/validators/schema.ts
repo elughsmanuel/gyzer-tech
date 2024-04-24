@@ -107,7 +107,7 @@ export const updateUserSchema = Joi.object({
 });
 
 export const updateUserRoleSchema = Joi.object({
-    role: Joi.string().valid('user', 'admin').required().messages({
+    role: Joi.string().valid('staff', 'manager', 'admin').required().messages({
         "any.required": ROLE_REQUIRED,
         "string.empty": EMPTY_ROLE,
     }),

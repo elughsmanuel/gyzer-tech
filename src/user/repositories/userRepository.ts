@@ -185,6 +185,16 @@ class UserRepository {
       
         return updatedUserRole;
     }
+
+    async findManagerById(managerId: number) {
+      const user = await User.findOne({
+        where: {
+          managerId: managerId,
+        },
+      });
+    
+      return user;
+    }
 }
 
 export default UserRepository;
