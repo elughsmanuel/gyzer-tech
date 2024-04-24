@@ -97,6 +97,20 @@ class EvaluationRepository {
         
         return count;
     }
+
+    async getMyEvaluationById(userId: number, id: number) {
+        const evaluation = await Evaluation.findOne({
+            where: {
+                [Op.or]: [
+                    { evaluateeId: userId },
+                    { evaluatorId: userId },
+                ],
+                id: id
+            }
+        });
+      
+        return evaluation;
+    }
 }
 
 export default EvaluationRepository;

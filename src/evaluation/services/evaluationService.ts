@@ -148,6 +148,15 @@ class EvaluationService {
             totalPages: totalPages,
         }
     }
+
+    async getMyEvaluationById(userId: number, id: number) {
+        const evaluation = await this.evaluationRepository.getMyEvaluationById(userId, id);
+
+        return {
+            status: true,
+            data: evaluation,
+        }
+    }
 }
 
 export default EvaluationService;

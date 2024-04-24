@@ -127,3 +127,22 @@ export const getMyEvaluations = async (
         next(error);
     }
 };
+
+export const getMyEvaluationById = async (
+    req: Request & {userId?: string}, 
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
+        const { id } = req.params;
+
+        const evaluation = await evaluationService.getMyEvaluationById(
+            Number(req.userId),
+            Number(id),
+        );
+
+        return res.status(StatusCodes.OK).json(evaluation);
+    } catch (error) {
+        next(error);
+    }
+};
