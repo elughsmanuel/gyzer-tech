@@ -114,6 +114,40 @@ class EvaluationService {
             data: evaluation,
         }
     }
+
+    async getMyEvaluations(
+        userId: number,
+        page: any,
+        perPage: any,
+        type?: string,
+    ) {
+        const count = await this.evaluationRepository.getMyTotalEvaluationCount();
+
+        // Calculate pagination values
+        const skip = (page - 1) * perPage;
+        const currentPage = Math.ceil(page);
+        const totalPages = Math.ceil(count / perPage);
+
+        let evaluations;
+
+        if(type === "sent") {
+            evaluations = await this.evaluationRepository.getMyEvaluationsSent(userId, skip, perPage);
+        }
+
+        if(type === "received") {
+            evaluations = await this.evaluationRepository.getMyEvaluationsReceived(userId, skip, perPage);
+        }
+        
+        evaluations = await this.evaluationRepository.getMyEvaluations(userId, skip, perPage);
+
+        return {
+            status: true,
+            results: evaluations.length,
+            data: evaluations,
+            currentPage: currentPage,
+            totalPages: totalPages,
+        }
+    }
 }
 
 export default EvaluationService;

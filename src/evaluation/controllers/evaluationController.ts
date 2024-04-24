@@ -102,3 +102,28 @@ export const getEvaluationById = async (
         next(error);
     }
 };
+
+export const getMyEvaluations = async (
+    req: Request & {userId?: string},
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
+        const { 
+            page,
+            perPage,
+            type,
+        } = req.query;
+
+        const evaluations = await evaluationService.getMyEvaluations(
+            Number(req.userId),
+            parseFloat(page as string) || '1',
+            parseFloat(perPage as string || '10'),
+            type as string,
+        );
+
+        return res.status(StatusCodes.OK).json(evaluations);
+    } catch (error) {
+        next(error);
+    }
+};

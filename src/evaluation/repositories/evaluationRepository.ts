@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import Evaluation from "../../models/evaluation";
 
 class EvaluationRepository {
@@ -41,6 +42,60 @@ class EvaluationRepository {
         const evaluation = await Evaluation.findByPk(id);
       
         return evaluation;
+    }
+
+    async getMyEvaluations(userId: number, skip: any, perPage: any) {
+        const options = {
+            where: {
+                [Op.or]: [
+                    { evaluateeId: userId },
+                    { evaluatorId: userId },
+                ],
+            },
+    
+            offset: skip,
+            limit: perPage,
+        };
+
+        const evaluations = await Evaluation.findAll(options);
+
+        return evaluations;
+    }
+
+    async getMyEvaluationsSent(userId: number, skip: any, perPage: any) {
+        const options = {
+            where: {
+                evaluatorId: userId,
+            },
+    
+            offset: skip,
+            limit: perPage,
+        };
+
+        const evaluations = await Evaluation.findAll(options);
+
+        return evaluations;
+    }
+
+    async getMyEvaluationsReceived(userId: number, skip: any, perPage: any) {
+        const options = {
+            where: {
+                evaluateeId: userId,
+            },
+    
+            offset: skip,
+            limit: perPage,
+        };
+
+        const evaluations = await Evaluation.findAll(options);
+
+        return evaluations;
+    }
+
+    async getMyTotalEvaluationCount() {
+        const count = await Evaluation.count();
+        
+        return count;
     }
 }
 
