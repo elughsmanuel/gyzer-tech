@@ -3,19 +3,30 @@ import dotenv from 'dotenv';
 dotenv.config();
 import http from "http";
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import sequelize from './models';
 import { errorMiddleware } from './middleware/errorMiddleware';
 import { logger } from './log/logger';
 import authRouter from './auth/routers/authRouter';
 import userRouter from './user/routers/userRouter';
 import evaluationRouter from './evaluation/routers/evaluationRouter';
+import { RATE_LIMIT } from './utils/constants';
 
 const app = express();
 const host = process.env.HOST || 'localhost';
 const port = Number(process.env.PORT || 8000);
 const httpServer = http.createServer(app);
 
+app.use(helmet());
 app.use(express.json());
+
+const limiter = rateLimit({
+    max: 100,
+    windowMs: 60 * 60 * 1000,
+    message: RATE_LIMIT,
+});
+app.use('/api', limiter);
 
 app.get('/', (req, res) => {
     return  res.status(StatusCodes.OK).json({
