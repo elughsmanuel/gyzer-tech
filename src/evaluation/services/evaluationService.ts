@@ -6,6 +6,7 @@ import {
     EVALUATEE_NOT_FOUND,
     EVALUATOR_PERMISSION,
 } from '../utils/constants';
+import { evaluationQuery } from '../utils/evaluationQuery';
 
 class EvaluationService {
     private evaluationRepository: EvaluationRepository;
@@ -44,6 +45,66 @@ class EvaluationService {
         }
     }
 
+    async getAllEvaluations(
+        page: any,
+        perPage: any,
+        evaluateeId?: string,
+        evaluatorId?: string,
+        month?: string,
+        year?: string,
+        minWorkQualityScore?: number,
+        maxWorkQualityScore?: number,
+        minTaskCompletionScore?: number,
+        maxTaskCompletionScore?: number,
+        minAboveAndBeyondScore?: number,
+        maxAboveAndBeyondScore?: number,
+        minCommunication?: number,
+        maxCommunication?: number,
+        sortBy?: string,
+        sortOrder?: string,
+        fields?: string[],
+    ) {
+        // Build the query for filtering evaluation
+        const query = evaluationQuery.buildEvaluationQuery(
+            evaluateeId,
+            evaluatorId,
+            month,
+            year,
+            minWorkQualityScore,
+            maxWorkQualityScore,
+            minTaskCompletionScore,
+            maxTaskCompletionScore,
+            minAboveAndBeyondScore,
+            maxAboveAndBeyondScore,
+            minCommunication,
+            maxCommunication,
+        );
+
+        // Build options for sorting products
+        const sortOptions = evaluationQuery.buildSortOptions(
+            sortBy,
+            sortOrder,
+        );
+
+        const selectFields = fields ? fields : undefined;
+
+        const count = await this.evaluationRepository.getTotalEvaluationCount(query);
+
+        // Calculate pagination values
+        const skip = (page - 1) * perPage;
+        const currentPage = Math.ceil(page);
+        const totalPages = Math.ceil(count / perPage);
+        
+        const evaluations = await this.evaluationRepository.getAllEvaluations(query, sortOptions, skip, perPage, selectFields);
+
+        return {
+            status: true,
+            results: evaluations.length,
+            data: evaluations,
+            currentPage: currentPage,
+            totalPages: totalPages,
+        }
+    }
 }
 
 export default EvaluationService;
