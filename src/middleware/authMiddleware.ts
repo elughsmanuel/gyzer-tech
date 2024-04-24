@@ -43,9 +43,13 @@ export const authenticate = (
         // Attach the decoded user information
         (req as any).user = decodedUser;
 
-        // Attach the user ID separately
         // For authenticated requests
+
+        // Attach the user ID separately
         (req as any).userId = decodedUser.userId;
+
+        // Attach the role separately
+        (req as any).role = decodedUser.role;
 
         next();
     });

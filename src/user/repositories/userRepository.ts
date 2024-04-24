@@ -195,6 +195,16 @@ class UserRepository {
     
       return user;
     }
+
+    async findRole(role: string) {
+      const user = await User.findOne({
+        where: {
+          role: role,
+        },
+      });
+    
+      return user;
+    }
 }
 
 export default UserRepository;

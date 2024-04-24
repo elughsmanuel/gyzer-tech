@@ -12,7 +12,7 @@ const userRepository = new UserRepository();
 const evaluationService = new EvaluationService(evaluationRepository, userRepository);
 
 export const createEvaluation = async (
-    req: Request & {userId?: string}, 
+    req: Request & {userId?: string, role?: string}, 
     res: Response,
     next: NextFunction,
 ) => {
@@ -24,6 +24,7 @@ export const createEvaluation = async (
             Number(evaluateeId),
             schema,
             Number(req.userId),
+            String(req.role),
         );
 
         return res.status(StatusCodes.CREATED).json(createEvaluation);

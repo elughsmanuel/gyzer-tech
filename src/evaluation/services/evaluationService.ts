@@ -19,17 +19,21 @@ class EvaluationService {
         this.userRepository = userRepository;
     }
 
-    async createEvaluation(evaluateeId: number, data: any, evaluatorId: number) {
-        const evaluatee = await this.userRepository.getUserById(evaluateeId);
+    async createEvaluation(evaluateeId: number, data: any, evaluatorId: number, evaluatorRole: string) {
+        const user = await this.userRepository.getUserById(evaluateeId);
 
-        if(!evaluatee) {
+        if(!user) {
             throw new BadRequest(EVALUATEE_NOT_FOUND);
         }
 
-        const evaluator = await this.userRepository.findManagerById(evaluatorId);
+        const role = evaluatorRole;
 
-        if(!evaluator) {
-            throw new Forbidden(EVALUATOR_PERMISSION);
+        if(role === "manager") {
+            const evaluator = await this.userRepository.findManagerById(evaluatorId);
+
+            if(!evaluator) {
+                throw new Forbidden(EVALUATOR_PERMISSION);
+            }
         }
 
         const evaluation = await this.evaluationRepository.createEvaluation(evaluateeId, data, evaluatorId);
