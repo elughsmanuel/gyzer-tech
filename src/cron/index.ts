@@ -21,7 +21,7 @@ export const monthlyReminderCron = (userRepository: UserRepository) => {
 };
 
 export const followUpReminderCron = (userRepository: UserRepository) => {
-    cron.schedule('0 0 */3 1 * *', async () => {
+    cron.schedule('0 0 4-31 * *', async () => {
         const users = await userRepository.getAllUsersForReminder();
 
         const usersData = users.map(user => user.get({ plain: true }))
