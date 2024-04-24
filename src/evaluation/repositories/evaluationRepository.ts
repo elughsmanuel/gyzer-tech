@@ -36,6 +36,12 @@ class EvaluationRepository {
         
         return count;
     }
+
+    async getEvaluationById(id: number) {
+        const evaluation = await Evaluation.findByPk(id);
+      
+        return evaluation;
+    }
 }
 
 export default EvaluationRepository;

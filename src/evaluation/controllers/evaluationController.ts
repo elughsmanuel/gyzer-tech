@@ -59,7 +59,7 @@ export const getAllEvaluations = async (
             fields,
         } = req.query;
 
-        const products = await evaluationService.getAllEvaluations(
+        const evaluations = await evaluationService.getAllEvaluations(
             parseFloat(page as string) || '1',
             parseFloat(perPage as string || '10'),
             evaluateeId as string,
@@ -79,7 +79,25 @@ export const getAllEvaluations = async (
             fields ? (fields as string).split(',') : undefined,
         );
 
-        return res.status(StatusCodes.OK).json(products);
+        return res.status(StatusCodes.OK).json(evaluations);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getEvaluationById = async (
+    req: Request, 
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
+        const { id } = req.params;
+
+        const evaluation = await evaluationService.getEvaluationById(
+            Number(id),
+        );
+
+        return res.status(StatusCodes.OK).json(evaluation);
     } catch (error) {
         next(error);
     }
