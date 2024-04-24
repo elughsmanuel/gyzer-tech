@@ -16,7 +16,7 @@ interface EvaluationAttributes {
     communicationComment: string;
     evaluatorId: number;
     month: string;
-    year: number;
+    year: string;
     createdAt?: Date,
     updatedAt?: Date,
 }
@@ -34,7 +34,7 @@ class Evaluation extends Model<EvaluationAttributes> implements EvaluationAttrib
     public communicationComment!: string;
     public evaluatorId!: number;
     public month!: string;
-    public year!: number;
+    public year!: string;
     public createdAt?: Date;
     public updatedAt?: Date;
 }
@@ -145,7 +145,7 @@ Evaluation.init({
         },
     },
     year: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: {

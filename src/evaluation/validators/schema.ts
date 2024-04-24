@@ -49,14 +49,28 @@ export const createEvaluationSchema = Joi.object({
         "any.required": 'COMMUNICATION COMMENT REQUIRED',
         "string.empty": 'EMPTY COMMUNICATION COMMENT',
     }),
-    month: Joi.string().trim().required().messages({
+    month: Joi.string().valid(
+        'January', 
+        'February', 
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+        ).trim().required().messages({
         "any.required": 'MONTH REQUIRED',
         "string.empty": 'EMPTY MONTH',
     }),
-    year: Joi.number().integer().required().messages({
+    year: Joi.string().min(4).max(4).pattern(/^\d+$/).required().messages({
         "any.required": 'YEAR REQUIRED',
         "string.empty": 'EMPTY YEAR',
-        "number.base": "YEAR NUMBER",
-        "number.integer": 'YEAR INTEGER',
+        "string.min": 'YEAR EXACTLY 4 DIGITS',
+        "string.max": 'YEAR EXACTLY 4 DIGITS',
+        "string.pattern.base": "YEAR ONLY 0 - 9"
     }),
 });

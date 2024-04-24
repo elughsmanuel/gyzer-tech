@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express'; 
 import { StatusCodes } from 'http-status-codes';
 import Joi from 'joi';
-import Unauthenticated from '../errors/Unauthenticated';
 import BadRequest from '../errors/BadRequest';
+import Forbidden from '../errors/Forbidden';
+import Unauthenticated from '../errors/Unauthenticated';
 import UnprocessableEntity from '../errors/UnprocessableEntity';
 import { logger } from '../log/logger';
 
@@ -12,14 +13,21 @@ export const errorMiddleware = (
     res: Response, 
     next: NextFunction,
 ) => {
-    if (err instanceof Unauthenticated) {
+    if (err instanceof BadRequest) {
         return res.status(err.statusCode).json({
             success: false,
             data: err.message,
         });
     }
 
-    if (err instanceof BadRequest) {
+    if (err instanceof Forbidden) {
+        return res.status(err.statusCode).json({
+            success: false,
+            data: err.message,
+        });
+    }
+
+    if (err instanceof Unauthenticated) {
         return res.status(err.statusCode).json({
             success: false,
             data: err.message,
