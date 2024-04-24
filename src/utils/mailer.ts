@@ -5,6 +5,7 @@ import {
     SEND_WELCOME,
     SEND_RESET_PASSWORD,
     SEND_MONTHLY_REMINDER,
+    SEND_FOLLOW_UP_REMINDER,
 } from './constants';
 
 interface User {
@@ -70,6 +71,10 @@ class EmailService {
 
     async sendMonthlyReminder() {
         await this.send('monthlyReminder', SEND_MONTHLY_REMINDER);
+    }
+
+    async sendFollowUpReminder() {
+        await this.send('followUpReminder', SEND_FOLLOW_UP_REMINDER);
     }
 };
 

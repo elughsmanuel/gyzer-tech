@@ -12,7 +12,10 @@ import authRouter from './auth/routers/authRouter';
 import userRouter from './user/routers/userRouter';
 import evaluationRouter from './evaluation/routers/evaluationRouter';
 import { RATE_LIMIT } from './utils/constants';
-import { monthlyReminderCron } from './cron';
+import { 
+    monthlyReminderCron,
+    followUpReminderCron,
+} from './cron';
 import UserRepository from './user/repositories/userRepository';
 
 const app = express();
@@ -33,6 +36,7 @@ app.use('/api', limiter);
 const userRepository = new UserRepository();
 
 monthlyReminderCron(userRepository);
+followUpReminderCron(userRepository);
 
 app.get('/', (req, res) => {
     return  res.status(StatusCodes.OK).json({

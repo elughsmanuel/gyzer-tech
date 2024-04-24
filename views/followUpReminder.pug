@@ -1,0 +1,15 @@
+extends baseEmail
+
+block content
+  p Hi #{firstName},
+  p We hope this message finds you well. Just a gentle reminder that we're still waiting for your valuable feedback on your colleagues' performance. Your insights are crucial for our team's growth and development.
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') Create Evaluation
+  p Thank you.
