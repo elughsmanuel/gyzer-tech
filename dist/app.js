@@ -22,7 +22,7 @@ const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const cors_1 = __importDefault(require("cors"));
 const models_1 = __importDefault(require("./models"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
-const logger_1 = require("./log/logger");
+// import { logger } from './log/logger';
 const authRouter_1 = __importDefault(require("./auth/routers/authRouter"));
 const userRouter_1 = __importDefault(require("./user/routers/userRouter"));
 const evaluationRouter_1 = __importDefault(require("./evaluation/routers/evaluationRouter"));
@@ -76,18 +76,18 @@ app.use(errorMiddleware_1.errorMiddleware);
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (models_1.default === null || models_1.default === void 0 ? void 0 : models_1.default.authenticate());
-        logger_1.logger.info(`[DATABASE] - Database connection has been successfully established.`);
+        console.log(`[DATABASE] - Database connection has been successfully established.`);
         try {
             httpServer.listen(port, host, () => {
-                logger_1.logger.info(`🌟 🛠️  [SERVER] - Server is listening on http://${host}:${port}`);
+                console.log(`🌟 🛠️  [SERVER] - Server is listening on http://${host}:${port}`);
             });
         }
         catch (error) {
-            logger_1.logger.fatal(`[SERVER] - Failed to start. Encountered an error during startup.`, error);
+            console.log(`[SERVER] - Failed to start. Encountered an error during startup.`, error);
         }
     }
     catch (error) {
-        logger_1.logger.fatal(`[DATABASE] - Server not started due to database connection error.`, error);
+        console.log(`[DATABASE] - Server not started due to database connection error.`, error);
     }
 });
 startServer();

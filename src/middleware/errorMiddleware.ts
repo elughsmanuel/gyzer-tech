@@ -5,7 +5,7 @@ import BadRequest from '../errors/BadRequest';
 import Forbidden from '../errors/Forbidden';
 import Unauthenticated from '../errors/Unauthenticated';
 import UnprocessableEntity from '../errors/UnprocessableEntity';
-import { logger } from '../log/logger';
+// import { logger } from '../log/logger';
 
 export const errorMiddleware = (
     err: any, 
@@ -51,8 +51,8 @@ export const errorMiddleware = (
 
     // Handle errors in development by logging the stack
     if (process.env.NODE_ENV === 'development') {
-        logger.error(err.message);
-        logger.error(err.stack);
+        console.log(err.message);
+        console.log(err.stack);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             success: false,
             error: err.message,

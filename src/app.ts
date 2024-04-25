@@ -8,7 +8,7 @@ import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import sequelize from './models';
 import { errorMiddleware } from './middleware/errorMiddleware';
-import { logger } from './log/logger';
+// import { logger } from './log/logger';
 import authRouter from './auth/routers/authRouter';
 import userRouter from './user/routers/userRouter';
 import evaluationRouter from './evaluation/routers/evaluationRouter';
@@ -77,17 +77,17 @@ app.use(errorMiddleware);
 const startServer = async () => {
     try {
         await sequelize?.authenticate();
-        logger.info(`[DATABASE] - Database connection has been successfully established.`);
+        console.log(`[DATABASE] - Database connection has been successfully established.`);
 
         try {
             httpServer.listen(port, host, () => {
-                logger.info(`🌟 🛠️  [SERVER] - Server is listening on http://${host}:${port}`);
+                console.log(`🌟 🛠️  [SERVER] - Server is listening on http://${host}:${port}`);
             });
         } catch (error){
-            logger.fatal(`[SERVER] - Failed to start. Encountered an error during startup.`, error);
+            console.log(`[SERVER] - Failed to start. Encountered an error during startup.`, error);
         } 
     } catch (error) {
-        logger.fatal(`[DATABASE] - Server not started due to database connection error.`, error);
+        console.log(`[DATABASE] - Server not started due to database connection error.`, error);
     }
   
 };

@@ -10,7 +10,7 @@ const BadRequest_1 = __importDefault(require("../errors/BadRequest"));
 const Forbidden_1 = __importDefault(require("../errors/Forbidden"));
 const Unauthenticated_1 = __importDefault(require("../errors/Unauthenticated"));
 const UnprocessableEntity_1 = __importDefault(require("../errors/UnprocessableEntity"));
-const logger_1 = require("../log/logger");
+// import { logger } from '../log/logger';
 const errorMiddleware = (err, req, res, next) => {
     if (err instanceof BadRequest_1.default) {
         return res.status(err.statusCode).json({
@@ -45,8 +45,8 @@ const errorMiddleware = (err, req, res, next) => {
     }
     // Handle errors in development by logging the stack
     if (process.env.NODE_ENV === 'development') {
-        logger_1.logger.error(err.message);
-        logger_1.logger.error(err.stack);
+        console.log(err.message);
+        console.log(err.stack);
         return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
             success: false,
             error: err.message,
