@@ -9,7 +9,7 @@ export const monthlyReminderCron = (userRepository: UserRepository) => {
         const usersData = users.map(user => user.get({ plain: true }))
 
         usersData.forEach( async (cur) => {
-            const evaluationUrl = `http://localhost:8000/evaluation`;
+            const evaluationUrl = `${process.env.BASE_URL}/dashboard/add-evaluation`;
 
             await new EmailService(
                 cur,
@@ -27,7 +27,7 @@ export const followUpReminderCron = (userRepository: UserRepository) => {
         const usersData = users.map(user => user.get({ plain: true }))
 
         usersData.forEach( async (cur) => {
-            const evaluationUrl = `http://localhost:8000/evaluation`;
+            const evaluationUrl = `${process.env.BASE_URL}/dashboard/add-evaluation`;
 
             await new EmailService(
                 cur,

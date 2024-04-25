@@ -74,7 +74,7 @@ class AuthService {
         // Generate an access token for the user
         const accessToken = createToken(res, user.id.toString(), user.role);
 
-        const welcomeUrl = `${req.protocol}://${req.get('host')}/home`;
+        const welcomeUrl = `${req.protocol}://${req.get('host')}/dashboard`;
 
         await new EmailService(
             user, 

@@ -8,7 +8,6 @@ import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import sequelize from './models';
 import { errorMiddleware } from './middleware/errorMiddleware';
-// import { logger } from './log/logger';
 import authRouter from './auth/routers/authRouter';
 import userRouter from './user/routers/userRouter';
 import evaluationRouter from './evaluation/routers/evaluationRouter';

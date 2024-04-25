@@ -22,7 +22,7 @@ For detailed API documentation, you can refer to the [Postman Documentation.](ht
 
 ## Live URL
 
-Check out the live URL [here.](https://mainstack-production.up.railway.app/api/v1)
+Check out the live URL [here.](https://gyzer-tech.onrender.com/api/v1)
 
 ## Built With
 
