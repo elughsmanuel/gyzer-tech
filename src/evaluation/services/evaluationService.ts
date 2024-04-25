@@ -128,17 +128,31 @@ class EvaluationService {
         const currentPage = Math.ceil(page);
         const totalPages = Math.ceil(count / perPage);
 
-        let evaluations;
-
         if(type === "sent") {
-            evaluations = await this.evaluationRepository.getMyEvaluationsSent(userId, skip, perPage);
+            const evaluations = await this.evaluationRepository.getMyEvaluationsSent(userId, skip, perPage);
+
+            return {
+                status: true,
+                results: evaluations.length,
+                data: evaluations,
+                currentPage: currentPage,
+                totalPages: totalPages,
+            }
         }
 
         if(type === "received") {
-            evaluations = await this.evaluationRepository.getMyEvaluationsReceived(userId, skip, perPage);
+            const evaluations = await this.evaluationRepository.getMyEvaluationsReceived(userId, skip, perPage);
+
+            return {
+                status: true,
+                results: evaluations.length,
+                data: evaluations,
+                currentPage: currentPage,
+                totalPages: totalPages,
+            }
         }
         
-        evaluations = await this.evaluationRepository.getMyEvaluations(userId, skip, perPage);
+        const evaluations = await this.evaluationRepository.getMyEvaluations(userId, skip, perPage);
 
         return {
             status: true,
