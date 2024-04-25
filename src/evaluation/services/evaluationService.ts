@@ -5,6 +5,7 @@ import Forbidden from '../../errors/Forbidden';
 import { 
     EVALUATEE_NOT_FOUND,
     EVALUATOR_PERMISSION,
+    SELF_EVALUATION_PERMISSION,
 } from '../utils/constants';
 import { evaluationQuery } from '../utils/evaluationQuery';
 
@@ -28,6 +29,10 @@ class EvaluationService {
         }
 
         const role = evaluatorRole;
+
+        if(evaluateeId === evaluatorId) {
+            throw new Forbidden(SELF_EVALUATION_PERMISSION);
+        }
 
         if(role === "manager") {
             const evaluator = await this.userRepository.findManagerById(evaluatorId);

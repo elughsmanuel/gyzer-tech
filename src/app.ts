@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(cors()); 
 
 const limiter = rateLimit({
-    max: 100,
+    max: 1000,
     windowMs: 60 * 60 * 1000,
     message: RATE_LIMIT,
 });
